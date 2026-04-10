@@ -1,0 +1,28 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bruski-claude-plugins",
+  "owner": {
+    "name": "Sizhe Wang",
+    "email": "bruceeewong@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Personal Claude Code skills — private marketplace for cross-device sync",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "tasks",
+      "description": "Task tracking skills: create, read, update, list, complete, and discard task docs (plan.md / todo.md / report.md / lesson.md).",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/task-create",
+        "./skills/task-read",
+        "./skills/task-update",
+        "./skills/task-list",
+        "./skills/task-complete",
+        "./skills/task-discard"
+      ]
+    }
+  ]
+}
