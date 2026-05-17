@@ -23,6 +23,15 @@
         "./skills/task-complete",
         "./skills/task-discard"
       ]
+    },
+    {
+      "name": "obsidian",
+      "description": "Obsidian vault management skills: process and distribute inbox notes into the knowledge base following vault rules.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/manage-inbox-notes"
+      ]
     }
   ]
 }
