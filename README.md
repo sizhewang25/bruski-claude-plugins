@@ -19,9 +19,10 @@ You only install the plugins you need on a given device — selective install is
 
 ## Plugins
 
-| Plugin  | Skills                                                                                       | Description                                          |
-|---------|----------------------------------------------------------------------------------------------|------------------------------------------------------|
-| `tasks` | `task-create`, `task-read`, `task-update`, `task-list`, `task-complete`, `task-discard`     | Task documentation workflow (plan/todo/report/lesson) |
+| Plugin     | Skills                                                                                       | Description                                          |
+|------------|----------------------------------------------------------------------------------------------|------------------------------------------------------|
+| `tasks`    | `task-create`, `task-read`, `task-update`, `task-list`, `task-complete`, `task-discard`     | Task documentation workflow (plan/todo/report/lesson) |
+| `obsidian` | `manage-inbox-notes`                                                                         | Process and distribute Obsidian vault inbox notes into the knowledge base |
 
 ## Repo layout
 
