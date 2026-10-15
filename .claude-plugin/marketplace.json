@@ -32,6 +32,15 @@
       "skills": [
         "./skills/manage-inbox-notes"
       ]
+    },
+    {
+      "name": "todoist",
+      "description": "Todoist skills: manage tasks, projects, labels, filters, sections, comments, and reminders via the official `td` CLI (@doist/todoist-cli).",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/todoist-cli"
+      ]
     }
   ]
 }
