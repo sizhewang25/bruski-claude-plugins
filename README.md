@@ -1,21 +1,83 @@
 # bruski-claude-plugins
 
-Personal, private [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces) for syncing custom skills across devices.
+Shared skills for Claude Code and Codex. Keep one `skills/` source in Git and install the same workflows on each device. Claude Code marketplace installation is also supported.
 
-## Install on a new device
+## Install on a new device: Claude Code and Codex
+
+Requires Git and Python 3.9+. Clone this repository, then choose your agent:
+
+```bash
+git clone https://github.com/sizhewang25/bruski-claude-plugins.git
+cd bruski-claude-plugins
+python3 scripts/install-skills.py --agent both --dry-run
+python3 scripts/install-skills.py --agent both
+```
+
+Use `--agent codex` or `--agent claude` to install for one agent. By default all
+skills are installed. Select groups with `--group`, for example:
+
+```bash
+python3 scripts/install-skills.py --agent codex --group tasks obsidian
+```
+
+The installer copies complete skill directories, including supporting resources:
+
+| Agent | User-level destination |
+|---|---|
+| Codex | `~/.agents/skills/<skill-name>/` |
+| Claude Code | `~/.claude/skills/<skill-name>/` |
+
+Installed copies work independently of this checkout. Existing identical copies
+are accepted. Previous installations are updated only if their contents still
+match the installer's manifest. Conflicting local edits, unmanaged copies, and
+existing skill symlinks stop installation before any copies are changed. Preserve
+or move conflicting copies before retrying. No force-overwrite option is provided.
+Skills removed from the repository are retained locally for manual review.
+
+You can also open this checkout in either agent and ask:
+
+> Read the repository instructions and install its skills for both Claude Code and Codex.
+
+`AGENTS.md` provides Codex instructions; `CLAUDE.md` imports the same instructions
+for Claude Code. Skill groups come from `.claude-plugin/marketplace.json`.
+
+### Use the skills
+
+In Codex, mention a skill such as `$task-create` or `$manage-inbox-notes`.
+For standalone Claude skills use `/task-create` or `/manage-inbox-notes`.
+You can also describe the task naturally and let the agent match the description.
+Installed skills are available on the next turn; restart the agent if they do not
+appear. Task skill examples currently use Claude slash-command notation; in Codex,
+mention the same name with `$` and provide arguments in your prompt.
+
+Todoist additionally requires `npm install -g @doist/todoist-cli` and `td auth login`.
+Installing the skill does not install the CLI or transfer account credentials.
+
+### Update each device
+
+```bash
+git pull --ff-only
+python3 scripts/install-skills.py --agent both
+```
+
+Use the same agent and group selection you used when installing. Rerun the
+installer after pulling to copy updates and install newly added skills.
+
+## Alternative: Claude Code marketplace
+
+For Claude Code, you can instead install selected plugin groups:
 
 ```text
-/plugin marketplace add bruceeewong/bruski-claude-plugins
+/plugin marketplace add sizhewang25/bruski-claude-plugins
 /plugin install tasks@bruski-claude-plugins
+/plugin install obsidian@bruski-claude-plugins
+/plugin install todoist@bruski-claude-plugins
 ```
 
-You only install the plugins you need on a given device — selective install is the whole point.
-
-## Update everywhere
-
-```text
-/plugin marketplace update bruski-claude-plugins
-```
+Use `/plugin marketplace update bruski-claude-plugins` to refresh the catalog,
+then `/plugin update <plugin>@bruski-claude-plugins` for each installed plugin.
+Choose either marketplace or standalone installation for each Claude skill to
+avoid duplicate entries. Codex can use the standalone installer independently.
 
 ## Plugins
 
@@ -35,6 +97,9 @@ You only install the plugins you need on a given device — selective install is
 │   └── marketplace.json     # marketplace + plugin definitions
 ├── skills/                   # flat directory of all skills
 │   └── <skill-name>/SKILL.md
+├── scripts/install-skills.py # copy installer for both agents
+├── AGENTS.md                # shared agent installation instructions
+├── CLAUDE.md                # imports AGENTS.md for Claude Code
 ├── README.md
 └── .gitignore
 ```
@@ -53,6 +118,6 @@ You only install the plugins you need on a given device — selective install is
    }
    ```
 3. Commit, push.
-4. On each device that wants it: `/plugin marketplace update bruski-claude-plugins` then `/plugin install <theme>@bruski-claude-plugins`.
+4. On each device, pull and rerun the copy installer with the desired groups. For Claude marketplace installs, refresh the marketplace and install/update the themed plugin.
 
 No directory reshuffling — every plugin shares the flat `skills/` root. New themes just bundle existing skill folders by name.
