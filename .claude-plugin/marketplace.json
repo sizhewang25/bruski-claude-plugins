@@ -41,6 +41,15 @@
       "skills": [
         "./skills/todoist-cli"
       ]
+    },
+    {
+      "name": "documents",
+      "description": "Document export skills: convert Markdown files to polished, print-ready PDFs via headless Google Chrome. macOS only; requires Google Chrome and python3 >= 3.9.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/md-to-pdf"
+      ]
     }
   ]
 }
